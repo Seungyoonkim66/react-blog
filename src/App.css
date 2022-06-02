@@ -1,0 +1,23 @@
+.root-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  background-color: transparent !important;
+  height: 34px !important;
+  width: 34px !important;
+  border: 1px solid #E0E3E7 !important;
+  border-radius: 10px !important;
+  margin: 0 4px !important;
+}
+.root-btn:hover{
+  background-color: #F3F6F9 !important;
+  border-color: #CDD2D7 !important;
+}
+
+.text-primary{
+  color: #1565c0 !important;
+}
