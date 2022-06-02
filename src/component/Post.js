@@ -26,6 +26,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import EditPost from "./EditPost";
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 const colorPalette = [red, purple, indigo, blue, green, amber, deepOrange, pink];
 
@@ -40,7 +41,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function Post({ post, deletePost }) {
+function Post({ post, deletePost, updatePost }) {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [avatar, setAvatar] = React.useState();
@@ -63,8 +64,8 @@ function Post({ post, deletePost }) {
     setOpenVertMenu(false);
   };
   const handleClickEditBtn = () => {
+      setOpenVertMenu(false);
       setEditMode(true);
-      console.log("Ecit")
   }
 
   /* 아바타 세팅은 마운트될 때 한번만 실행 */
@@ -80,6 +81,7 @@ function Post({ post, deletePost }) {
 
 
   return (
+    editMode ? <EditPost post={post} setEditMode={setEditMode} updatePost={updatePost}/> :
     <Card id={"post-" + (post ? post.id : "null")} sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={avatar}

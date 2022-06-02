@@ -7,12 +7,25 @@ import {
   CardContent,
   Typography,
   Avatar,
+  TextField,
+  TextareaAutosize,
 } from "@mui/material";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 
-const EditPostContainer = styled.div``;
+const EditPostContainer = styled.div`
+  .content-area {
+    font-size: small;
+  }
+`;
 
-function EditPost({ post }) {
+function EditPost({ post, setEditMode, updatePost }) {
+  const handleClickComplete = (id) => {
+    let title = document.getElementById("title-edit").value;
+    let summary = document.getElementById("summary-edit").value;
+    let content = document.getElementById("content-edit").value;
+    updatePost(id, title, summary, content);
+    setEditMode(false);
+  };
 
   return (
     <EditPostContainer>
@@ -20,21 +33,32 @@ function EditPost({ post }) {
         <CardHeader
           avatar={<Avatar></Avatar>}
           action={
-            <IconButton>
+            <IconButton color="success" onClick={() => handleClickComplete(post.id)}>
               <CheckOutlinedIcon />
             </IconButton>
           }
-          title={post ? post.title : "Title"}
+          title={<TextField id="title-edit" label="제목" variant="outlined" size="small" defaultValue={post.title} />}
           subheader={post ? post.time : "Month Day, Year"}
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
-            {post ? post.summary : "Summary of the post"}
-          </Typography>
+          <TextField
+            fullWidth
+            id="summary-edit"
+            label="요약"
+            variant="outlined"
+            size="small"
+            defaultValue={post.summary}
+          />
         </CardContent>
 
         <CardContent>
-          <Typography paragraph>{post ? post.content : "Content of the post"}</Typography>
+          <TextareaAutosize
+            id="content-edit"
+            minRows={6}
+            placeholder="내용"
+            defaultValue={post.content}
+            style={{ width: "100%", border: "solid 1px #c5cacf", borderRadius: "4px" }}
+          />
         </CardContent>
       </Card>
     </EditPostContainer>

@@ -1,11 +1,5 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
@@ -39,6 +33,13 @@ const reducer = (state, action) => {
         ...state,
         posts: state.posts.filter((p) => p.id !== action.postId),
       };
+    case ACTION_TYPES.UPDATE_POST:
+      console.log("Update Post ", action.postId);
+      let updatePost = state.posts.find(post => post.id === action.postId);
+      updatePost.title = action.title;
+      updatePost.summary = action.summary;
+      updatePost.content = action.content;
+      return { ...state };
     default:
       return state;
   }
@@ -103,6 +104,16 @@ function MainPage() {
     dispatch({ type: ACTION_TYPES.DELETE_POST, postId: deleteId });
   }, []);
 
+  const updatePost = useCallback((updateId, title, summary, content) => {
+    dispatch({ 
+        type: ACTION_TYPES.UPDATE_POST, 
+        postId: updateId, 
+        title: title,
+        summary: summary,
+        content: content
+     });
+  },[]);
+
   return (
     <MainPageContainer>
       <Container>
@@ -113,9 +124,7 @@ function MainPage() {
           <Typography variant="h4" className="mb-3" sx={{ fontWeight: "bold" }}>
             Posts
           </Typography>
-          <Button
-            variant="contained"
-            onClick={() => setOpenNewPost(!openNewPost)}>
+          <Button variant="contained" onClick={() => setOpenNewPost(!openNewPost)}>
             {openNewPost ? <RemoveOutlinedIcon /> : <AddOutlinedIcon />}
           </Button>
         </div>
@@ -125,7 +134,7 @@ function MainPage() {
         <Grid container rowSpacing={2} columnSpacing={2}>
           {state.posts.map((post, idx) => (
             <Grid item xs={mid ? 3 : sml ? 4 : xSml ? 6 : 12} key={idx}>
-              <Post post={post} deletePost={deletePost} />
+              <Post post={post} deletePost={deletePost} updatePost={updatePost}/>
             </Grid>
           ))}
         </Grid>
