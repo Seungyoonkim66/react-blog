@@ -21,6 +21,8 @@ const LoginPageContainer = styled.div`
 function LoginPage() {
     const { setUser } = useContext(LoginContext);
     const navigate = useNavigate();
+
+
     
     const onClickLoginBtn = useCallback(() => {
         const userId = document.getElementById("user-id").value;
@@ -36,11 +38,11 @@ function LoginPage() {
             like : []
         });
         navigate('/');
-    })
+    },[navigate, setUser]);
     
     
     const onKeyDownPWInput = (e) => {
-        if(e.keyCode == 13){
+        if(e.keyCode === 13){
             document.getElementById("login-btn").click();
         }
     }

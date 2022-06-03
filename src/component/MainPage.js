@@ -1,49 +1,19 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
-import React, { useCallback, useContext, useEffect, useReducer, useState } from "react";
+import React, { useCallback, useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uuid from "react-uuid";
 import styled from "styled-components";
 import { LoginContext } from "../context/LoginContext";
 import Post from "./Post";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NewPost from "./NewPost";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import { POST_ACTION_TYPES as ACTION_TYPES } from "../action/ActionTypes";
+import { PostReducer as reducer } from "../reducer/Reducer";
+import TodoList from "./TodoList";
 
 const MainPageContainer = styled.div``;
-
-const ACTION_TYPES = {
-  ADD_POST: "add-post",
-  DELETE_POST: "delete-post",
-  UPDATE_POST: "update-post",
-  READ_POSTS: "read-posts",
-  READ_POST: "read-post",
-};
-const reducer = (state, action) => {
-  switch (action.type) {
-    case ACTION_TYPES.ADD_POST:
-      console.log("Add Post ", action.newPost);
-      return {
-        ...state,
-        posts: [...state.posts, action.newPost],
-      };
-    case ACTION_TYPES.DELETE_POST:
-      console.log("Delete Post ", action.postId);
-      return {
-        ...state,
-        posts: state.posts.filter((p) => p.id !== action.postId),
-      };
-    case ACTION_TYPES.UPDATE_POST:
-      console.log("Update Post ", action.postId);
-      let updatePost = state.posts.find(post => post.id === action.postId);
-      updatePost.title = action.title;
-      updatePost.summary = action.summary;
-      updatePost.content = action.content;
-      return { ...state };
-    default:
-      return state;
-  }
-};
 
 function MainPage() {
   const mid = useMediaQuery("(min-width:900px)");
@@ -57,7 +27,7 @@ function MainPage() {
         id: 1,
         title: "승윤이의 일기",
         time: "Thu Jun 02, 2022",
-        author: "seungyoon",
+        author: user,
         image_url: "https://picsum.photos/200/300",
         summary: "첫번째 글은 승윤이의 일기입니다.",
         content:
@@ -69,7 +39,7 @@ function MainPage() {
         id: 2,
         title: "승윤이의 두번째 기록",
         time: "Thu Jun 01, 2022",
-        author: "seungyoon",
+        author: user,
         // image_url: "https://picsum.photos/200/300",
         summary: "두번째 글은 어떤 기록입니다.",
         content:
@@ -115,7 +85,7 @@ function MainPage() {
   },[]);
 
   return (
-    <MainPageContainer>
+    <MainPageContainer className="pb-4">
       <Container>
         <Typography variant="subtitle1" className="my-3">
           {user && user.name + " 님, 환영합니다."}
@@ -139,6 +109,8 @@ function MainPage() {
           ))}
         </Grid>
       </Container>
+
+      <TodoList/>
     </MainPageContainer>
   );
 }

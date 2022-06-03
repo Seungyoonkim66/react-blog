@@ -32,7 +32,9 @@ function Header() {
   return (
     <HeaderContainer id="main-header" theme={isDark ? theme.dark : theme.light}>
       <Container className="header-container">
-        <img src="/static/images/logo.svg" alt="seungyoon" />
+        <a href="/">
+          <img src="/static/images/logo.svg" alt="seungyoon" />
+        </a>
         <div>
           <Button
             variant="outlined"
