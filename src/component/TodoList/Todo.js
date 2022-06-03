@@ -1,4 +1,4 @@
-import { Typography, Checkbox, FormControlLabel, IconButton, useMediaQuery, Switch } from "@mui/material";
+import { Typography, Checkbox, FormControlLabel, IconButton, useMediaQuery, Switch, Chip } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { amber, grey, red, blue } from "@mui/material/colors";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
@@ -8,35 +8,47 @@ import styled from "styled-components";
 
 const TodoContainer = styled.div``;
 
-function Todo({ todo, toggleDone, toggleImprt, deleteTodo, markImm }) {
+function Todo({ todo, toggleDone, toggleImprt, deleteTodo, markImm, markDDay }) {
     const [textColor, setTextColor] = useState('black');
+    const [dDay, setDDay] = useState(0);
+
     const mid = useMediaQuery("(min-width:700px)");
     const sml = useMediaQuery("(min-width:500px)");
    
     useEffect(() => {
+        const now = new Date();
+        const due = new Date(todo.start);  
+        let dday =  Math.ceil((due-now)/86400000);
+        if(dday === 0) setDDay("day");
+        else setDDay(dday);
+        
         if(todo.done === true || !markImm) {
             setTextColor('black');
         }
         else {
-            const now = new Date();
-            const due = new Date(todo.start);    
-            if((due - now) <= 86400000){
-                setTextColor(red[400]); // D-1
-            } else if ((due - now) <= 259200000) { 
+            
+            if (dday <= 0){
+                setTextColor(red[400]); // D-day
+            } else if (dday <= 3) { 
                 setTextColor(amber[500]); // D-3
-            }
+            } 
         }
+        
     },  [todo.done, todo.start, markImm]);
     
     return (
         <TodoContainer>
-            <div className="d-flex flex-row align-itmes-center justify-content-between">
-                <FormControlLabel
-                    control={<Checkbox checked={todo.done} sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }} />}
-                    label={<Typography sx={{ color : textColor }}>{todo.description}</Typography>}
-                    onChange={() => toggleDone(todo.id)}
-                    sx={todo.done ? { textDecoration: "line-through" } : {}}
-                />
+            <div className="d-flex flex-row align-items-center justify-content-between">
+                <div className="d-flex flex-row align-items-center">
+                    <FormControlLabel
+                        control={<Checkbox checked={todo.done} sx={{ "& .MuiSvgIcon-root": { fontSize: 20 } }} />}
+                        label={<Typography sx={{ color : textColor }}>{todo.description}</Typography>}
+                        onChange={() => toggleDone(todo.id)}
+                        sx={todo.done ? { textDecoration: "line-through" } : {}}
+                    />
+                    {markDDay && <Chip label={<Typography variant="caption">D-{dDay}</Typography>} variant="outlined" size="small"/>}
+                    
+                </div>
                 <div>
                     {todo.start !== "" && sml && (
                         <Typography variant="caption" sx={todo.done ? { textDecoration: "line-through" } : {}}>

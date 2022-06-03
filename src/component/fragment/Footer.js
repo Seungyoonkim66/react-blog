@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { ThemeContext, ThemeStyleContext } from '../context/ThemeContext';
+import { ThemeContext, ThemeStyleContext } from '../../context/ThemeContext';
 
 const FooterContainer = styled.div`
     position: fixed;

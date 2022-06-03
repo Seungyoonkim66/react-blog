@@ -3,13 +3,13 @@ import { POST_ACTION_TYPES, TODO_ACTION_TYPES } from "../action/ActionTypes";
 export const PostReducer = (state, action) => {
     switch (action.type) {
         case POST_ACTION_TYPES.ADD_POST:
-            console.log("Add Post ", action.newPost);
+            // console.log("Add Post ", action.newPost);
             return { ...state, posts: [...state.posts, action.newPost] };
         case POST_ACTION_TYPES.DELETE_POST:
-            console.log("Delete Post ", action.postId);
+            // console.log("Delete Post ", action.postId);
             return { ...state, posts: state.posts.filter((p) => p.id !== action.postId) };
         case POST_ACTION_TYPES.UPDATE_POST:
-            console.log("Update Post ", action.postId);
+            // console.log("Update Post ", action.postId);
             const updatePosts = [...state.posts];
             const updatePost = updatePosts.find((post) => post.id === action.postId);
             updatePost.title = action.title;
@@ -19,7 +19,7 @@ export const PostReducer = (state, action) => {
             updatePosts[updatePostIndex] = updatePost;
             return { ...state, posts: updatePosts };
         case POST_ACTION_TYPES.LIKE_POST:
-            console.log("Like Post ", action.postId);
+            // console.log("Like Post ", action.postId);
             const likePosts = state.posts;
             const likePost = likePosts.find((post) => post.id === action.postId);
             likePost.isLike = true;
@@ -37,22 +37,22 @@ export const TodoReducer = (state, action) => {
     switch(action.type) { 
         case TODO_ACTION_TYPES.ADD_TODO : 
             const newTodo = action.payload.newTodo;
-            console.log("Add todo : " , newTodo );
+            // console.log("Add todo : " , newTodo );
             return [...todos, newTodo];
         case TODO_ACTION_TYPES.TOGGLE_TODO_DONE:
-            console.log("Toggel todo done flag : ", action.payload.id);
+            // console.log("Toggel todo done flag : ", action.payload.id);
             const doneTodo = todos.find(td => td.id === action.payload.id);
             doneTodo.done = !doneTodo.done;
             todos[todos.indexOf(doneTodo)] = doneTodo;
             return todos;
         case TODO_ACTION_TYPES.TOGGLE_TODO_IMPRT:
-            console.log("Toggel todo important flag : ", action.payload.id);
+            // console.log("Toggel todo important flag : ", action.payload.id);
             const imprtTodo = todos.find(td => td.id === action.payload.id);
             imprtTodo.imprtFlag = !imprtTodo.imprtFlag;
             todos[todos.indexOf(imprtTodo)] = imprtTodo;
             return todos;
         case TODO_ACTION_TYPES.DELETE_TODO:
-            console.log("Toggel todo important flag : ", action.payload.id);
+            // console.log("Toggel todo important flag : ", action.payload.id);
             return todos.filter(todo => todo.id !== action.payload.id);
         default:
             return state;
