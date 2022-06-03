@@ -1,14 +1,11 @@
-import { Typography, Checkbox, TextField, Button, Alert } from "@mui/material";
+import { Typography, Checkbox, TextField, Button, Alert, Paper } from "@mui/material";
 import { amber } from "@mui/material/colors";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import React, { useCallback, useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-const NewTodoContainer = styled.div``;
 
 function NewTodo({ openNewTodo, addTodo }) {
     const [showAlert, setShowAlert] = useState(false);
@@ -17,7 +14,7 @@ function NewTodo({ openNewTodo, addTodo }) {
     const [endDate, setEndDate] = useState(null);
     // const [startDate, setStartDate] = useState(new Date());
     // const [endDate, setEndDate] = useState(new Date(new Date().getTime() + 86400000));// start date + 1
-   
+
     const handleClickAddBtn = () => {
         const start = document.getElementById("todo-start");
         const end = document.getElementById("todo-end");
@@ -25,7 +22,7 @@ function NewTodo({ openNewTodo, addTodo }) {
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
-            },5000);
+            }, 5000);
             return;
         } else {
             setShowAlert(false);
@@ -33,12 +30,12 @@ function NewTodo({ openNewTodo, addTodo }) {
             setStartDate(null);
             setEndDate(null);
         }
-    }
+    };
 
     return (
-        <NewTodoContainer>
+        <>
             {openNewTodo && (
-                <>
+                <Paper className="p-3">
                     <div className="d-flex flex-row align-items-center justify-content-between mb-2">
                         <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">
                             New Todo
@@ -48,7 +45,11 @@ function NewTodo({ openNewTodo, addTodo }) {
                         </Button>
                     </div>
 
-                    {showAlert && <Alert className="mb-3" severity="error">시작일이 종료일 이전이어야 합니다.</Alert>}
+                    {showAlert && (
+                        <Alert className="mb-3" severity="error">
+                            시작일이 종료일 이전이어야 합니다.
+                        </Alert>
+                    )}
 
                     <TextField id="todo-description" fullWidth label="할 일" size="small" className="mb-3" />
                     <div className="d-flex flex-row align-items-center justify-conent-between">
@@ -64,7 +65,10 @@ function NewTodo({ openNewTodo, addTodo }) {
                             }
                             isClearable
                         />
-                        <Typography variant="span" className="mx-3 text-muted"> - </Typography>
+                        <Typography variant="span" className="mx-3 text-muted">
+                            {" "}
+                            -{" "}
+                        </Typography>
                         <DatePicker
                             id="todo-end"
                             selected={endDate}
@@ -87,9 +91,9 @@ function NewTodo({ openNewTodo, addTodo }) {
                             color="warning"
                         />
                     </div>
-                </>
+                </Paper>
             )}
-        </NewTodoContainer>
+        </>
     );
 }
 

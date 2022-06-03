@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography, Alert } from "@mui/material";
+import { Button, Grid, TextField, Typography, Alert, Paper } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
@@ -40,7 +40,7 @@ function NewPost({ addPost }) {
   };
 
   return (
-    <NewPostContainer className="pb-3">
+    <Paper className="p-3 mb-3">
       <div className="d-flex flex-row align-items-center justify-content-between mb-2">
         <Typography variant="h5" sx={{ fontWeight: "bold" }} color="primary">
           New Post
@@ -78,7 +78,7 @@ function NewPost({ addPost }) {
       </Grid>
 
 
-    </NewPostContainer>
+    </Paper>
   );
 }
 
