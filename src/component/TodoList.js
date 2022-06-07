@@ -20,16 +20,23 @@ const initTodos = [
         imprtFlag: false,
         done: false,
     },
-    { id: 3, description: "민주 송별회", start: "June 06, 2022 12:00 AM", end: "", imprtFlag: true, done: false },
+    { id: 3, description: "송별회", start: "June 08, 2022 12:00 AM", end: "", imprtFlag: true, done: false },
     {
         id: 4,
-        description: "3일 뒤 이사",
-        start: "June 04, 2022 12:00 AM",
-        end: "June 6, 2022 12:00 AM",
+        description: "이사",
+        start: "June 11, 2022 12:00 AM",
+        end: "",
         imprtFlag: true,
         done: false,
     },
-    {id: 5, description: '오늘 했어야 하는데 안 한 일', start: 'June 03, 2022 1:35 PM', end: '', imprtFlag: false, done: false }
+    {
+        id: 5,
+        description: "오늘 했어야 하는데 안 한 일",
+        start: "June 07, 2022 1:35 PM",
+        end: "",
+        imprtFlag: false,
+        done: false,
+    },
 ];
 
 function TodoList() {
@@ -80,7 +87,6 @@ function TodoList() {
                     </Typography>
 
                     <div>
-
                         <FormControlLabel
                             labelPlacement="bottom"
                             control={<Switch size="small" checked={markDDay} onChange={() => setMarkDDay(!markDDay)} />}

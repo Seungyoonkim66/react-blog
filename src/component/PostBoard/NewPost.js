@@ -83,3 +83,4 @@ function NewPost({ addPost }) {
 }
 
 export default NewPost;
+  

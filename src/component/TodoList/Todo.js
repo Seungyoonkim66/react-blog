@@ -1,6 +1,6 @@
-import { Typography, Checkbox, FormControlLabel, IconButton, useMediaQuery, Switch, Chip } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
-import { amber, grey, red, blue } from "@mui/material/colors";
+import { Typography, Checkbox, FormControlLabel, IconButton, useMediaQuery, Chip } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { amber, grey, red } from "@mui/material/colors";
 import StarOutlineOutlinedIcon from "@mui/icons-material/StarOutlineOutlined";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
@@ -27,11 +27,13 @@ function Todo({ todo, toggleDone, toggleImprt, deleteTodo, markImm, markDDay }) 
         }
         else {
             
-            if (dday <= 0){
+            if (dday === 0){
                 setTextColor(red[400]); // D-day
             } else if (dday <= 3) { 
                 setTextColor(amber[500]); // D-3
-            } 
+            } else if (dday < 0){ // 지난거 
+                setTextColor(grey[500]);
+            }
         }
         
     },  [todo.done, todo.start, markImm]);
@@ -46,7 +48,7 @@ function Todo({ todo, toggleDone, toggleImprt, deleteTodo, markImm, markDDay }) 
                         onChange={() => toggleDone(todo.id)}
                         sx={todo.done ? { textDecoration: "line-through" } : {}}
                     />
-                    {markDDay && <Chip label={<Typography variant="caption">D-{dDay}</Typography>} variant="outlined" size="small"/>}
+                    {!todo.done && markDDay && <Chip label={<Typography variant="caption">D-{dDay}</Typography>} variant="outlined" size="small"/>}
                     
                 </div>
                 <div>
