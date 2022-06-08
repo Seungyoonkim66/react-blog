@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# SIMPLE POST BOARD & TODO LIST with React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+React로 게시물을 작성/수정/삭제하는 모듈과 투두리스트 모듈을 만들었습니다. React hooks 공부한 내용을 적용해보고 싶어 시작한 프로젝트로 useReducer를 사용해서 state 관리를 했습니다. action, reducer, dispatch 등의 개념을 공부하고나니 관리해야하는 state가 많은 대규모 프로젝트에서 왜 redux를 사용하는지 알 수 있었습니다. 그리고 useCallback과 useEffect를 사용해서 랜더링될 때 다시 호출이 필요한 메소드들만 호출하게 하여 최적화된 코드를 작성하고자 노력했습니다. 또한, useMediaquery를 이용해서 반응형 웹 기능을 추가했습니다.
 
-In the project directory, you can run:
+##
 
-### `npm start`
+# Used Tech.
+* `React`
+* `Material-UI`, `Bootstrap`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+##
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# How to use
+```
+$ git clone https://github.com/Seungyoonkim66/react-blog.git
 
-### `npm test`
+$ npm install 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+$ npm start # localhost:3000
+```
+### 자세한 설명은 [링크](https://www.notion.so/TODO-47d4b6f638bc48cab227c70d1d998cd7)를 참고해주세요.
